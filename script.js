@@ -1,7 +1,3 @@
-/*========================================
-        PRELOADER
-========================================*/
-
 window.addEventListener("load", () => {
 
     const loader = document.getElementById("loader");
@@ -11,11 +7,6 @@ window.addEventListener("load", () => {
     }, 600);
 
 });
-
-
-/*========================================
-        DARK MODE
-========================================*/
 
 const themeBtn = document.getElementById("theme-btn");
 
@@ -39,11 +30,6 @@ themeBtn.addEventListener("click", () => {
 
 });
 
-
-/*========================================
-        MOBILE MENU
-========================================*/
-
 const menuBtn = document.getElementById("menu-btn");
 const navLinks = document.querySelector(".nav-links");
 
@@ -53,7 +39,6 @@ menuBtn.addEventListener("click",()=>{
 
 });
 
-// Close mobile menu after clicking a link
 navLinks.querySelectorAll("a").forEach(link=>{
 
     link.addEventListener("click",()=>{
@@ -63,11 +48,6 @@ navLinks.querySelectorAll("a").forEach(link=>{
     });
 
 });
-
-
-/*========================================
-        PROJECT MODAL
-========================================*/
 
 function openModal(id){
 
@@ -97,11 +77,6 @@ window.onclick=function(e){
 
 };
 
-
-/*========================================
-        CONTACT FORM
-========================================*/
-
 const form=document.getElementById("contact-form");
 
 form.addEventListener("submit",function(e){
@@ -113,11 +88,6 @@ form.addEventListener("submit",function(e){
     form.reset();
 
 });
-
-
-/*========================================
-        ACTIVE NAVBAR
-========================================*/
 
 const sections=document.querySelectorAll("section");
 const navItems=document.querySelectorAll(".nav-links a");
@@ -151,12 +121,6 @@ window.addEventListener("scroll",()=>{
     });
 
 });
-
-
-/*========================================
-        SCROLL ANIMATION
-========================================*/
-
 const observer=new IntersectionObserver((entries)=>{
 
     entries.forEach(entry=>{
@@ -178,11 +142,6 @@ document.querySelectorAll(".section").forEach(sec=>{
     observer.observe(sec);
 
 });
-
-
-/*========================================
-        BACK TO TOP BUTTON
-========================================*/
 
 const topBtn=document.createElement("button");
 
@@ -234,12 +193,6 @@ topBtn.addEventListener("click",()=>{
     });
 
 });
-
-
-/*========================================
-        SMOOTH NAVIGATION
-========================================*/
-
 document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
 
     anchor.addEventListener("click",function(e){
@@ -261,11 +214,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
     });
 
 });
-
-
-/*========================================
-        TYPING EFFECT (TAGLINE)
-========================================*/
 
 const tagline = document.querySelector(".hero-tagline");
 
