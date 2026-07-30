@@ -1,251 +1,196 @@
-window.addEventListener("load", () => {
+(function initTheme(){
+  const saved = localStorage.getItem('portfolio-theme');
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const theme = saved || (prefersLight ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
 
-    const loader = document.getElementById("loader");
-
-    setTimeout(() => {
-        loader.classList.add("hide");
-    }, 600);
-
-});
-
-const themeBtn = document.getElementById("theme-btn");
-
-themeBtn.addEventListener("click", () => {
-
-    document.body.classList.toggle("dark");
-
-    if(document.body.classList.contains("dark")){
-
-        themeBtn.classList.remove("fa-moon");
-        themeBtn.classList.add("fa-sun");
-
-    }
-
-    else{
-
-        themeBtn.classList.remove("fa-sun");
-        themeBtn.classList.add("fa-moon");
-
-    }
-
-});
-
-const menuBtn = document.getElementById("menu-btn");
-const navLinks = document.querySelector(".nav-links");
-
-menuBtn.addEventListener("click",()=>{
-
-    navLinks.classList.toggle("show");
-
-});
-
-navLinks.querySelectorAll("a").forEach(link=>{
-
-    link.addEventListener("click",()=>{
-
-        navLinks.classList.remove("show");
-
-    });
-
-});
-
-function openModal(id){
-
-    document.getElementById(id).style.display="block";
-
+function applyThemeIcon(theme){
+  const btn = document.getElementById('theme-btn');
+  if(!btn) return;
+  btn.classList.remove('fa-moon', 'fa-sun');
+  btn.classList.add(theme === 'light' ? 'fa-sun' : 'fa-moon');
 }
 
-function closeModal(id){
-
-    document.getElementById(id).style.display="none";
-
+function toggleTheme(){
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('portfolio-theme', next);
+  applyThemeIcon(next);
 }
 
-window.onclick=function(e){
-
-    const modals=document.querySelectorAll(".modal");
-
-    modals.forEach(modal=>{
-
-        if(e.target===modal){
-
-            modal.style.display="none";
-
-        }
-
-    });
-
-};
-
-const form=document.getElementById("contact-form");
-
-form.addEventListener("submit",function(e){
-
-    e.preventDefault();
-
-    alert("Thank you for your message! I will get back to you soon.");
-
-    form.reset();
-
-});
-
-const sections=document.querySelectorAll("section");
-const navItems=document.querySelectorAll(".nav-links a");
-
-window.addEventListener("scroll",()=>{
-
-    let current="";
-
-    sections.forEach(section=>{
-
-        const sectionTop=section.offsetTop-150;
-
-        if(pageYOffset>=sectionTop){
-
-            current=section.getAttribute("id");
-
-        }
-
-    });
-
-    navItems.forEach(link=>{
-
-        link.classList.remove("active");
-
-        if(link.getAttribute("href")==="#"+current){
-
-            link.classList.add("active");
-
-        }
-
-    });
-
-});
-const observer=new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
-
-        }
-
-    });
-
-});
-
-document.querySelectorAll(".section").forEach(sec=>{
-
-    sec.classList.add("hidden");
-
-    observer.observe(sec);
-
-});
-
-const topBtn=document.createElement("button");
-
-topBtn.innerHTML='<i class="fa-solid fa-arrow-up"></i>';
-
-topBtn.id="topBtn";
-
-document.body.appendChild(topBtn);
-
-topBtn.style.position="fixed";
-topBtn.style.bottom="25px";
-topBtn.style.right="25px";
-topBtn.style.width="50px";
-topBtn.style.height="50px";
-topBtn.style.borderRadius="50%";
-topBtn.style.border="none";
-topBtn.style.background="#8B5CF6";
-topBtn.style.color="#fff";
-topBtn.style.cursor="pointer";
-topBtn.style.display="none";
-topBtn.style.fontSize="18px";
-topBtn.style.boxShadow="0 10px 25px rgba(0,0,0,.2)";
-topBtn.style.zIndex="999";
-
-window.addEventListener("scroll",()=>{
-
-    if(window.scrollY>300){
-
-        topBtn.style.display="block";
-
-    }
-
-    else{
-
-        topBtn.style.display="none";
-
-    }
-
-});
-
-topBtn.addEventListener("click",()=>{
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-});
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-
-    anchor.addEventListener("click",function(e){
-
-        e.preventDefault();
-
-        const target=document.querySelector(this.getAttribute("href"));
-
-        if(target){
-
-            target.scrollIntoView({
-
-                behavior:"smooth"
-
-            });
-
-        }
-
-    });
-
-});
-
-const tagline = document.querySelector(".hero-tagline");
-
-const roles = [
-    "Turning Ideas Into Reality",
-    "Software Engineering Student",
-    "Frontend Developer",
-    "IoT Enthusiast"
+const NEWS = [
+  { date: "Jul 2026", title: "Selected and received offer letter for exchange program at USM", desc: "Confirmed and Received the offer let for the semester exchange program at Universiti Sains Malaysia.", image: "OF-1.jpg"},
+  { date: "May 2026", title: "Joined CDC as Campus Ambassador", desc: "Started representing the Career Development Center on campus.", image: null },
+  { date: "Apr 2026", title: "Wrapped up Axiom Season-01 as Campus Ambassador", desc: "Helped organise and promote the event across campus.", image: null },
+  { date: "Apr 2026", title: "CGPA milestone — 3.97", desc: "Closed the semester maintaining strong academic performance.", image: null },
+  { date: "Mar 2026", title: "Skill Jobs Campus Ambassador onboarding", desc: "Onboarded as Campus Ambassador for Skill Jobs.", image: null },
+  { date: "Feb 2026", title: "Volunteered at 13th convocation,DIU", desc: "Supported event coordination during the convocation ceremony.", image: null },
+  { date: "Jan 2026", title: "Volunteered at Daffodil Family Day, 2026 ", desc: "Supported event coordination by being a Food Distributor and Back Up team member.", image: null },
+  { date: "Dec 2025", title: "LifeFloat became a hit project", desc: "Got extra points for the flood rescue support system.", image: null },
+  { date: "Nov 2025", title: "Conducted a Free Computer Session", desc: "Taught students about the basic fundamentals of the computer.", image: "computer-class.jpg" }
 ];
 
-let roleIndex = 0;
-let charIndex = 0;
+const FEEDBACK = [
+  { quote: "A dedicated and reliable student who consistently goes beyond what's asked in class projects.", name: "Tahsin Tasnim", role: "Lecturer<br> Department of Software Engineering<br> Daffodil International University" },
+  { quote: "Shows strong initiative in both technical work and leadership activities on campus.", name: "Tahmina Meem", role: "Lecturer<br> Department of Software Engineering<br> Daffodil International University" },
+  { quote: "Balances academic excellence with genuine creative talent; a rare and valuable combination.", name: "Sakib Ali Majumder", role: "Lecturer<br> Department of Software Engineering<br> Daffodil International University" }
+];
 
-function typeEffect() {
-    if (charIndex < roles[roleIndex].length) {
-        tagline.textContent += roles[roleIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeEffect, 100);
-    } else {
-        setTimeout(eraseEffect, 1500);
-    }
+function renderNews(){
+  const mount = document.getElementById('news-container');
+  if(!mount) return;
+  mount.innerHTML = NEWS.map(n => `
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>${n.date}</h3>
+        <h4>${n.title}</h4>
+        <p>${n.desc}</p>
+        ${n.image ? `<img src="${n.image}" alt="${n.title}">` : ''}
+      </div>
+    </div>
+  `).join('');
 }
 
-function eraseEffect() {
-    if (charIndex > 0) {
-        tagline.textContent = roles[roleIndex].substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(eraseEffect, 50);
-    } else {
-        roleIndex = (roleIndex + 1) % roles.length;
-        setTimeout(typeEffect, 500);
-    }
+function renderFeedback(){
+  const mount = document.getElementById('feedback-container');
+  if(!mount) return;
+  mount.innerHTML = FEEDBACK.map(f => `
+    <div class="feedback-card reveal tilt">
+      <div class="quote-mark">&ldquo;</div>
+      <p class="quote">${f.quote}</p>
+      <div class="person">
+        <strong>${f.name}</strong>
+        <span>${f.role}</span>
+      </div>
+    </div>
+  `).join('');
 }
 
-typeEffect();
+
+function initContactForm(){
+  const form = document.getElementById('contact-form');
+  if(!form) return;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    form.classList.add('sent');
+    form.reset(); 
+    const success = document.getElementById('form-success');
+    setTimeout(() => success.classList.add('show'), 250);
+  });
+}
+function initMobileNav(){
+  const burger = document.getElementById('nav-burger');
+  const links = document.getElementById('nav-links');
+  if(!burger || !links) return;
+  burger.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+}
+
+function initTilt(){
+  const cards = document.querySelectorAll('.tilt');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rotateY = ((x - cx) / cx) * 7;
+      const rotateX = -((y - cy) / cy) * 7;
+      card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+
+function initCustomCursor(){
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  if(!dot || !ring) return;
+  if(window.matchMedia('(pointer: coarse)').matches) return; // skip on touch devices
+
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    dot.style.left = `${e.clientX}px`;
+    dot.style.top = `${e.clientY}px`;
+    ring.dataset.tx = e.clientX;
+    ring.dataset.ty = e.clientY;
+  });
+
+  function animateRing(){
+    const tx = parseFloat(ring.dataset.tx) || 0;
+    const ty = parseFloat(ring.dataset.ty) || 0;
+    ringX += (tx - ringX) * 0.15;
+    ringY += (ty - ringY) * 0.15;
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  const hoverables = document.querySelectorAll('a, button, .tilt, input, textarea');
+  hoverables.forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('grow'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('grow'));
+  });
+
+  document.addEventListener('mouseleave', () => { dot.style.opacity = 0; ring.style.opacity = 0; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = 1; ring.style.opacity = 1; });
+}
+
+function initCertModal(){
+  const modal = document.getElementById('cert-modal');
+  const modalImg = document.getElementById('cert-modal-img');
+  const modalTitle = document.getElementById('cert-modal-title');
+  const closeBtn = document.getElementById('cert-modal-close');
+  if(!modal) return;
+
+  document.querySelectorAll('.cert-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      modalImg.src = btn.dataset.cert;
+      modalTitle.textContent = btn.dataset.title || 'Certificate';
+      modal.classList.add('open');
+    });
+  });
+
+  function closeModal(){ modal.classList.remove('open'); }
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+}
+
+function initReveal(){
+  const items = document.querySelectorAll('.reveal');
+  if(!items.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(el => io.observe(el));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyThemeIcon(document.documentElement.getAttribute('data-theme'));
+
+  renderNews();
+  renderFeedback();
+  initContactForm();
+  initMobileNav();
+  initReveal();
+  initTilt();
+  initCustomCursor();
+  initCertModal();
+
+  const themeBtn = document.getElementById('theme-btn');
+  if(themeBtn) themeBtn.addEventListener('click', toggleTheme);
+});
