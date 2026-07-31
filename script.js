@@ -23,7 +23,7 @@ function toggleTheme(){
 const NEWS = [
   { date: "Jul 2026", title: "Selected and received offer letter for exchange program at USM", desc: "Confirmed and Received the offer let for the semester exchange program at Universiti Sains Malaysia.", image: "OF-1.jpg"},
   { date: "May 2026", title: "Joined CDC as Campus Ambassador", desc: "Started representing the Career Development Center on campus.", image: null },
-  { date: "Apr 2026", title: "Wrapped up Axiom Season-01 as Campus Ambassador", desc: "Helped organise and promote the event across campus.", image: null },
+  { date: "Apr 2026", title: "Wrapped up Axiom Season-01 as Campus Ambassador", desc: "Helped organise and promote the event across campus.", image: "AXIOM_S1.png" },
   { date: "Apr 2026", title: "CGPA milestone — 3.97", desc: "Closed the semester maintaining strong academic performance.", image: null },
   { date: "Mar 2026", title: "Skill Jobs Campus Ambassador onboarding", desc: "Onboarded as Campus Ambassador for Skill Jobs.", image: null },
   { date: "Feb 2026", title: "Volunteered at 13th convocation,DIU", desc: "Supported event coordination during the convocation ceremony.", image: null },
